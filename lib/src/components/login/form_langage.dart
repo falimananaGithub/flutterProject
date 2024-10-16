@@ -1,4 +1,6 @@
 import 'package:app/src/data/caches/cache.dart';
+import 'package:app/src/features/langage/langage_app.dart';
+import 'package:app/src/models/langue.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/core/constants/constant.dart';
 
@@ -16,22 +18,57 @@ class FormLangage extends StatefulWidget {
 }
 
 class _FormLangageState extends State<FormLangage> {
-  final List<Locale> _locales = const [
-    Locale('en', 'English'), // English
-    Locale('fr', 'Francais'), // French
-    Locale('mg', 'Malagasy'), // Malagasy
-  ];
+  AppLangage langage = AppLangage();
 
+  List<Locale> _locales = [];
+  bool _loading = true;
   Locale _selectedLocale = Locale('en', 'English');
+  _FormLangageState() {
+    setLange();
+  }
 
+  void changeLangAfterSelected(BuildContext context, Locale? newValue) async {
+    //get langage current use
+    Map<dynamic, dynamic>? code = await langage
+        .getLangByCode(Localizations.localeOf(context).languageCode);
+
+    //update langage current to isUse 0;
+    await langage.updateLang(code!['id'],
+        Langue(code['id'], code['langCode'], code['langCountry'], 0));
+    //await langage.updateLang(3, Langue(3, 'mg', 'Malagasy', 0));
+
+    //update langage selected to isUSe 1;
+    Map<dynamic, dynamic>? newValueLange =
+        await langage.getLangByCode(newValue!.languageCode);
+    await langage.updateLang(
+        newValueLange!['id'],
+        Langue(newValueLange['id'], newValueLange['langCode'],
+            newValueLange['langCountry'], 1));
+  }
 //save langage in cache
-  CacheManager cacheManager = CacheManager.getInstance();
-  void setLange(String key, String value) async {
-    await cacheManager.saveData(key, value);
+
+  void setLange() async {
+    List<Map> list = await langage.getLangages();
+    setState(() {
+      list.forEach((map) {
+        _locales.add(Locale(map['langCode'], map['langCountry']));
+      });
+      _loading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_loading) {
+      return Container(
+        padding: EdgeInsets.only(top: 50),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    Locale currentLocale = Localizations.localeOf(context);
+
     return Column(
       children: [
         Container(
@@ -66,13 +103,12 @@ class _FormLangageState extends State<FormLangage> {
                     onChanged: (Locale? newValue) {
                       setState(() {
                         _selectedLocale = newValue!;
-                        setLange(StringLangCode, newValue.languageCode);
-                        setLange(StringLangCountry,
-                            newValue.countryCode ?? 'English');
+                        changeLangAfterSelected(context, newValue);
                         widget.onLocaleChange(_selectedLocale);
                       });
                     },
-                    value: _selectedLocale,
+                    value: Locale(currentLocale.languageCode,
+                        dataLocale[currentLocale.languageCode]),
                   ),
                 ),
               ),

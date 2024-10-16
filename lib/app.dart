@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   //get instance cacheManager
 
   bool isHasLangage = false;
+  bool isLoading = true;
 
   void _changeLanguage(Locale locale) {
     setState(() {
@@ -34,17 +35,14 @@ class _MyAppState extends State<MyApp> {
     //print(up);
     Map? langUse = await lang.getLangByIsUse(1);
 
-    print(isHasLangage1);
-
     _defaultLocale = isHasLangage1
         ? Locale(langUse?['langCode'], langUse?['langCountry'])
         : _defaultLocale;
 
     setState(() {
       isHasLangage = isHasLangage1;
+      isLoading = false;
     });
-
-    print(isHasLangage);
   }
 
   @override
@@ -52,22 +50,26 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     init();
 
-    var instance = FirebaseAuth.instance;
+    /*var instance = FirebaseAuth.instance;
     instance.authStateChanges().listen((User? user) {
       if (user == null) {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
       }
-    });
+    });*/
   }
 
   @override
   Widget build(BuildContext context) {
-    print("1");
-    print(isHasLangage);
-    AppRoutes routes =
-        AppRoutes(onLocaleChange: _changeLanguage, isLangDisponible: true);
+    if (isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    AppRoutes routes = AppRoutes(
+        onLocaleChange: _changeLanguage, isLangDisponible: isHasLangage);
     return MaterialApp(
       //set langage if it has else set defaults
       locale: _defaultLocale,
@@ -78,6 +80,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       initialRoute: routes.preloading, //AppRoutes.preloading, // Route initiale
       routes: routes.getRoutes(),
+      onGenerateRoute: routes.generateRoute(),
     );
   }
 }

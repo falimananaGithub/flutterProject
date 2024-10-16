@@ -7,21 +7,20 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:app/src/components/common/logo/logo_app.dart';
 
 class LoginScreen extends StatefulWidget {
-  final Function(Locale) onLocaleChange;
-  final bool isLangDisponible;
   const LoginScreen(
       {Key? key, required this.onLocaleChange, required this.isLangDisponible})
       : super(key: key);
+  final Function(Locale) onLocaleChange;
+  final bool isLangDisponible;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isContinue = false;
   @override
   Widget build(BuildContext context) {
-    print("d");
-    print(widget.isLangDisponible);
     return Scaffold(
       body: ListView(
         children: [
@@ -48,13 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 10,
               ),
               //form login
-              widget.isLangDisponible
+              widget.isLangDisponible || _isContinue
                   ? FormLogin()
                   : FormLangage(
                       onLocaleChange: widget.onLocaleChange,
                       onContinueSelected: () {
                         setState(() {
-                          //isLangDisponible = true;
+                          _isContinue = true;
                         });
                       },
                     )

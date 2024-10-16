@@ -65,7 +65,7 @@ class DataBaseManager {
     String sqlWhere = '';
     List<dynamic> args = [];
     List<String> columnTrue = [];
-    // remove type of column
+
     col.forEach((c) {
       columnTrue.add(splitString(c));
     });
@@ -154,7 +154,8 @@ class DataBaseManager {
     dynamic v;
     columns.forEach((column) {
       k = splitString(column); //key
-      v = object.map()[k]; // value => the object must have a method map()
+      v = object.map()[
+          k]; // value => the object must have a method map() who return object {"id": 1, ...}
       map[k] = v;
     });
     return map;
