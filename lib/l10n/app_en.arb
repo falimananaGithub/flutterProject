@@ -1,0 +1,16 @@
+{
+  "textLogoLogin": "Login",
+  "textLogoLangage":"Langage",
+  "textTitleLogin":"Login to continue using FaceDev",
+  "textTitleLangage":"Chose your prefer langage",
+  "textHintMail":"Enter you Mail",
+  "textLabelPassword":"Password",
+  "textForgotPassword":"Forgot password?",
+  "textConnexion":"Sign in",
+  "textLoginWithGoogle":"Or login with",
+  "textDontAccount":"Don't have account?",
+  "textSignUp":"sing up",
+  "textTitleRegister":"Create an account",
+  "textHaveAccount":"Have an account?",
+  "textConfirmPassword":"Confirm password"
+}

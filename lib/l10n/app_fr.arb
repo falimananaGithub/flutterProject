@@ -1,0 +1,18 @@
+{
+    "textLogoLogin": "Login",
+    "textLogoLangage":"Langue",
+    "textTitleLogin":"Connectez avant l'utilisation FaceDev",
+    "textTitleLangage":"Choisissez votre langue préferé",
+    "textHintMail":"Entrer votre E-Mail",
+    "textLabelPassword":"Mot de passe",
+    "textForgotPassword":"Mot de passe oublié ?",
+    "textConnexion":"Connexion",
+    "textLoginWithGoogle":"Ou login par ",
+    "textDontAccount":"Vous n'avez pas de compte?",
+    "textSignUp":"Inscription",
+    "textTitleRegister":"Créer un compte",
+    "textHaveAccount":"Vous avez déjà un compte? ",
+    "textConfirmPassword":"Confirmez le mot de passe"
+
+    
+}
