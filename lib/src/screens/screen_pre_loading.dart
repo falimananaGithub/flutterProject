@@ -1,4 +1,5 @@
 import 'package:app/src/components/common/loading/loading.dart';
+import 'package:app/src/core/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/screens/screen_login.dart';
 
@@ -21,6 +22,7 @@ class _LoadingPageState extends State<LoadingPage> {
     }
 
     return Scaffold(
+        backgroundColor: primaryFond,
         body: Loading(
             future: _loadData(),
             widget: LoginScreen(

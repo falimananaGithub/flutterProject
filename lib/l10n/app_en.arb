@@ -1,4 +1,5 @@
 {
+  "@@locale":"en",
   "textLogoLogin": "Login",
   "textLogoLangage":"Langage",
   "textTitleLogin":"Login to continue using FaceDev",
@@ -9,8 +10,10 @@
   "textConnexion":"Sign in",
   "textLoginWithGoogle":"Or login with",
   "textDontAccount":"Don't have account?",
-  "textSignUp":"sing up",
+  "textSignUp":"Sing up",
   "textTitleRegister":"Create an account",
   "textHaveAccount":"Have an account?",
-  "textConfirmPassword":"Confirm password"
+  "textConfirmPassword":"Confirm password",
+  "textValidatorEmail":"Please!, Enter a valid email",
+  "textValidatorPassword":"Minimum password 8 characters"
 }

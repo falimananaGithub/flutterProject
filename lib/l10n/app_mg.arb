@@ -1,0 +1,19 @@
+{
+    "@@locale":"mg",
+    "textLogoLogin": "Midira",
+    "textLogoLangage": "Fiteny",
+    "textTitleLogin": "Midira alohan'ny hampiasana FaceDev",
+    "textTitleLangage": "Safidio ny fiteny tianao indrindra",
+    "textHintMail": "Ampidiro ny E-Mail anao",
+    "textLabelPassword": "Teny miafina",
+    "textForgotPassword": "Adino ny teny miafina?",
+    "textConnexion": "Fifandraisana",
+    "textLoginWithGoogle": "Na midira amin'ny ",
+    "textDontAccount": "Tsy manana kaonty ve ianao?",
+    "textSignUp": "Hisoratra anarana",
+    "textTitleRegister": "Mamorona kaonty",
+    "textHaveAccount": "Manana kaonty ve ianao?",
+    "textConfirmPassword": "Hamafiso ny teny miafina",
+    "textValidatorEmail": "Ampidiro mailaka manan-kery",
+    "textValidatorPassword": "Teny miafina farafahakeliny litera 8"
+}

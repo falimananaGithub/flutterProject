@@ -1,4 +1,3 @@
-import 'package:app/src/data/caches/cache.dart';
 import 'package:app/src/features/langage/langage_app.dart';
 import 'package:app/src/models/langue.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +34,7 @@ class _FormLangageState extends State<FormLangage> {
     //update langage current to isUse 0;
     await langage.updateLang(code!['id'],
         Langue(code['id'], code['langCode'], code['langCountry'], 0));
-    //await langage.updateLang(3, Langue(3, 'mg', 'Malagasy', 0));
 
-    //update langage selected to isUSe 1;
     Map<dynamic, dynamic>? newValueLange =
         await langage.getLangByCode(newValue!.languageCode);
     await langage.updateLang(
@@ -79,21 +76,17 @@ class _FormLangageState extends State<FormLangage> {
                 width: 300,
                 padding: EdgeInsets.symmetric(horizontal: 10), // padding side
                 decoration: BoxDecoration(
-                  color:
-                      Color.fromRGBO(240, 241, 241, 0.757), // font button color
+                  color: secondFond, // font button color
                   borderRadius: BorderRadius.circular(15), // border radius
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<Locale>(
                     isExpanded: true,
-
-                    icon: Icon(Icons.arrow_drop_down, color: Colors.blue),
-                    dropdownColor:
-                        Colors.grey[200], // Couleur du menu déroulant
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    icon: Icon(Icons.arrow_drop_down, color: white),
+                    dropdownColor: inputTextColor,
                     style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontFamily: TimesNewRoman),
+                        color: white, fontSize: 16, fontFamily: TimesNewRoman),
                     items: _locales.map((Locale locale) {
                       return DropdownMenuItem<Locale>(
                         value: locale,

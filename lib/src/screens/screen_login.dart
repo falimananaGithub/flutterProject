@@ -22,27 +22,27 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryFond,
       body: ListView(
         children: [
           Column(
             children: [
-              LogoApp(
-                titleLogo: widget.isLangDisponible
-                    ? AppLocalizations.of(context)!.textLogoLogin
-                    : AppLocalizations.of(context)!.textLogoLangage,
-              ),
+              LogoApp(),
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                widget.isLangDisponible
-                    ? AppLocalizations.of(context)!.textTitleLogin
-                    : AppLocalizations.of(context)!.textTitleLangage,
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 80, 61, 30),
-                    fontFamily: TimesNewRoman,
-                    fontWeight: FontWeight.bold),
+              SizedBox(
+                height: 10,
               ),
+              widget.isLangDisponible == false
+                  ? Text(
+                      AppLocalizations.of(context)!.textTitleLangage,
+                      style: const TextStyle(
+                          color: white,
+                          fontFamily: TimesNewRoman,
+                          fontWeight: FontWeight.bold),
+                    )
+                  : Text(""),
               const SizedBox(
                 height: 10,
               ),

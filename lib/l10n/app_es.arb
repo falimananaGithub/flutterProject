@@ -1,0 +1,18 @@
+{   "@@locale":"es",
+    "textLogoLogin": "Iniciar sesión",
+    "textLogoLangage": "Idioma",
+    "textTitleLogin": "Inicia sesión antes de usar FaceDev",
+    "textTitleLangage": "Elige tu idioma preferido",
+    "textHintMail": "Introduce tu correo electrónico",
+    "textLabelPassword": "Contraseña",
+    "textForgotPassword": "¿Olvidaste tu contraseña?",
+    "textConnexion": "Conexión",
+    "textLoginWithGoogle": "O iniciar sesión con ",
+    "textDontAccount": "¿No tienes una cuenta?",
+    "textSignUp": "Registrarse",
+    "textTitleRegister": "Crear una cuenta",
+    "textHaveAccount": "¿Ya tienes una cuenta?",
+    "textConfirmPassword": "Confirmar contraseña",
+    "textValidatorEmail": "Introduce un correo válido",
+    "textValidatorPassword": "Contraseña de al menos 8 caracteres"
+}

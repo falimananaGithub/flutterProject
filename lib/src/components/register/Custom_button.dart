@@ -24,7 +24,7 @@ class _CustomButtonState extends State<CustomButton> {
       child: MaterialButton(
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15))),
-          color: const Color.fromRGBO(135, 206, 235, 1.0),
+          color: Colors.blue,
           minWidth: 300,
           onPressed: () {
             widget.onPressed();

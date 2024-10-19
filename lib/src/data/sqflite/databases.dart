@@ -21,7 +21,7 @@ class DataBaseManager {
     _database = await openDatabase(pathDatabase + dbName, version: version,
         onCreate: (Database db, int version) async {
       print("Database created");
-      // Create your table here when the database is created
+      //
     });
     return _database!; // Return the newly opened instance
   }
@@ -54,9 +54,9 @@ class DataBaseManager {
     }
   }
 
-  Future<List<Map>> list(String sql) async {
+  Future<List<Map>> list(String tableName) async {
     final db = await open();
-    return db.rawQuery('SELECT * FROM ${sql}');
+    return db.rawQuery('SELECT * FROM $tableName');
   }
 
   Future<Map?> getOneByWhere(

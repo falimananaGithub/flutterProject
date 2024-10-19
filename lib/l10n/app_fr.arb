@@ -1,9 +1,10 @@
 {
+    "@@locale":"fr",
     "textLogoLogin": "Login",
     "textLogoLangage":"Langue",
     "textTitleLogin":"Connectez avant l'utilisation FaceDev",
     "textTitleLangage":"Choisissez votre langue préferé",
-    "textHintMail":"Entrer votre E-Mail",
+    "textHintMail":"Entrer votre e-mail",
     "textLabelPassword":"Mot de passe",
     "textForgotPassword":"Mot de passe oublié ?",
     "textConnexion":"Connexion",
@@ -12,7 +13,9 @@
     "textSignUp":"Inscription",
     "textTitleRegister":"Créer un compte",
     "textHaveAccount":"Vous avez déjà un compte? ",
-    "textConfirmPassword":"Confirmez le mot de passe"
+    "textConfirmPassword":"Confirmez le mot de passe",
+    "textValidatorEmail":"Entrer un email valide",
+    "textValidatorPassword":"Mot de passe minimun 8 caractères"
 
     
 }

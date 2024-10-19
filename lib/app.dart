@@ -1,6 +1,4 @@
-import 'package:app/src/core/constants/constant.dart';
 import 'package:app/src/features/langage/langage_app.dart';
-import 'package:app/src/models/langue.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/routes/app_route.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -50,37 +48,41 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     init();
 
-    /*var instance = FirebaseAuth.instance;
+    var instance = FirebaseAuth.instance;
     instance.authStateChanges().listen((User? user) {
+      print(user);
       if (user == null) {
         print('User is currently signed out!');
       } else {
         print('User is signed in!');
       }
-    });*/
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
     AppRoutes routes = AppRoutes(
         onLocaleChange: _changeLanguage, isLangDisponible: isHasLangage);
-    return MaterialApp(
-      //set langage if it has else set defaults
-      locale: _defaultLocale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(colorSchemeSeed: Colors.blue),
-
-      debugShowCheckedModeBanner: false,
-      initialRoute: routes.preloading, //AppRoutes.preloading, // Route initiale
-      routes: routes.getRoutes(),
-      onGenerateRoute: routes.generateRoute(),
-    );
+    return isLoading //if is loading
+        ? Center(
+            child: Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              color: Colors.white10,
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : MaterialApp(
+            //set langage if it has else set defaults
+            locale: _defaultLocale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            debugShowCheckedModeBanner: false,
+            initialRoute:
+                routes.preloading, //AppRoutes.preloading, // Route initiale
+            routes: routes.getRoutes(),
+            onGenerateRoute: routes.generateRoute(),
+          );
   }
 }

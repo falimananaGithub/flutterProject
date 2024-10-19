@@ -1,3 +1,6 @@
+import 'package:app/src/components/register/Custom_button.dart';
+import 'package:app/src/components/register/Custom_field_email.dart';
+import 'package:app/src/components/register/Custom_field_pasword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:app/src/core/constants/constant.dart';
@@ -11,7 +14,8 @@ class FormLogin extends StatefulWidget {
 
 class _FormLoginState extends State<FormLogin> {
   bool passwordVisible = false;
-
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -21,22 +25,164 @@ class _FormLoginState extends State<FormLogin> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 450,
-      margin: const EdgeInsets.only(left: 10, right: 10),
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(50), topRight: Radius.circular(50)),
-        boxShadow: const [
-          BoxShadow(
-            color: const Color.fromARGB(141, 90, 89, 89), // Ombre légère
-            blurRadius: 3,
-            offset: Offset(0, 1), // Décalage de l'ombre
-          ),
-        ],
-      ),
-      child: Column(
+        height: 450,
+        margin: const EdgeInsets.only(left: 10, right: 10),
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+        decoration: BoxDecoration(
+          color: secondFond,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(50),
+              topRight: Radius.circular(50),
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+        ),
+        child: Column(
+          children: [
+            Text(
+              AppLocalizations.of(context)!.textLogoLogin,
+              style: TextStyle(
+                  color: white,
+                  fontFamily: 'TimesNewRoman',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Form(
+                key: GlobalKey<FormState>(),
+                child: Column(
+                  children: [
+                    CustomFieldEmail(
+                      hintText: AppLocalizations.of(context)!.textHintMail,
+                      inputControler: email,
+                      validatorText:
+                          AppLocalizations.of(context)!.textValidatorEmail,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      height: 1,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomFieldPassword(
+                      hintTextInput:
+                          AppLocalizations.of(context)!.textLabelPassword,
+                      inputControler: password,
+                      setRegex: false,
+                      textValidatorPassword: "",
+                      labelInput:
+                          Text(AppLocalizations.of(context)!.textLabelPassword),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      height: 1,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomButton(
+                      isIcon: false,
+                      onPressed: () {
+                        //createUser(context, email, password);
+                      },
+                      firstText: AppLocalizations.of(context)!.textConnexion,
+                      secondText: "",
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      alignment: Alignment.topRight,
+                      child: Text(
+                        AppLocalizations.of(context)!.textForgotPassword,
+                        style:
+                            TextStyle(color: white, fontFamily: TimesNewRoman),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      height: 1,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Divider(
+                          height: 1,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.textLoginWithGoogle,
+                          style: TextStyle(
+                            fontFamily: TimesNewRoman,
+                            color: white,
+                          ),
+                        ),
+                        Divider(
+                          height: 1,
+                        )
+                      ],
+                    ),
+                    Center(
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 5,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.facebook,
+                                color: Colors.blue,
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.email,
+                                color: white,
+                              ))
+                        ],
+                      ),
+                    ),
+                    Center(
+                        child: MaterialButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(AppLocalizations.of(context)!.textDontAccount,
+                                style: TextStyle(
+                                    fontFamily: TimesNewRoman, color: white)),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.textSignUp,
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontFamily: TimesNewRoman),
+                            )
+                          ]),
+                    ))
+                  ],
+                ))
+          ],
+        ));
+  }
+}
+
+/*
+Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
@@ -175,6 +321,5 @@ class _FormLoginState extends State<FormLogin> {
           ))
         ],
       ),
-    );
-  }
-}
+
+*/
