@@ -1,3 +1,5 @@
+import 'package:app/src/components/common/loading/loading.dart';
+import 'package:app/src/core/constants/constant.dart';
 import 'package:app/src/features/langage/langage_app.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/routes/app_route.dart';
@@ -20,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   bool isLoading = true;
 
   void _changeLanguage(Locale locale) {
+    print(locale);
     setState(() {
       _defaultLocale = locale;
     });
@@ -29,8 +32,6 @@ class _MyAppState extends State<MyApp> {
     AppLangage lang = AppLangage();
 
     bool isHasLangage1 = await lang.isLangTrue();
-    //bool up = await lang.updateLang(1, Langue(1, "en", "English", 1));
-    //print(up);
     Map? langUse = await lang.getLangByIsUse(1);
 
     _defaultLocale = isHasLangage1
@@ -63,26 +64,20 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     AppRoutes routes = AppRoutes(
         onLocaleChange: _changeLanguage, isLangDisponible: isHasLangage);
-    return isLoading //if is loading
-        ? Center(
-            child: Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Colors.white10,
-              child: CircularProgressIndicator(),
-            ),
-          )
-        : MaterialApp(
-            //set langage if it has else set defaults
-            locale: _defaultLocale,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            debugShowCheckedModeBanner: false,
-            initialRoute:
-                routes.preloading, //AppRoutes.preloading, // Route initiale
-            routes: routes.getRoutes(),
-            onGenerateRoute: routes.generateRoute(),
-          );
+    return MaterialApp(
+        //set langage if it has else set defaults
+        locale: _defaultLocale,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
+        home: Loading(
+            widget: Navigator(
+                initialRoute: FirebaseAuth.instance.currentUser != null
+                    ? routes.login
+                    : routes.home,
+                onGenerateRoute: routes.generateRoute()),
+            color: white,
+            size: 100,
+            condition: isLoading));
   }
 }

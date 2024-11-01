@@ -22,6 +22,9 @@ class _FormLoginState extends State<FormLogin> {
     passwordVisible = true;
   }
 
+  void login(
+      TextEditingController emailEdit, TextEditingController passwordEdit) {}
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -89,7 +92,7 @@ class _FormLoginState extends State<FormLogin> {
                     CustomButton(
                       isIcon: false,
                       onPressed: () {
-                        //createUser(context, email, password);
+                        login(email, password);
                       },
                       firstText: AppLocalizations.of(context)!.textConnexion,
                       secondText: "",

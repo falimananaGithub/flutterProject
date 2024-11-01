@@ -1,3 +1,4 @@
+import 'package:app/src/components/common/loading/Custom_loading.dart';
 import 'package:app/src/features/langage/langage_app.dart';
 import 'package:app/src/models/langue.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +43,20 @@ class _FormLangageState extends State<FormLangage> {
         Langue(newValueLange['id'], newValueLange['langCode'],
             newValueLange['langCountry'], 1));
   }
-//save langage in cache
 
   void setLange() async {
     List<Map> list = await langage.getLangages();
+    print('list lang: ');
+    print(list);
+    if (list.isEmpty) {
+      //create language if not exists
+      await langage.saveLang(Langue(1, 'en', 'English', 0));
+      await langage.saveLang(Langue(2, 'es', 'Espagnol', 0));
+      await langage.saveLang(Langue(3, 'fr', 'Français', 0));
+      //await langage.saveLang(Langue(4, 'mg', 'Malagasy', 0));
+      list = await langage.getLangages();
+    }
+
     setState(() {
       list.forEach((map) {
         _locales.add(Locale(map['langCode'], map['langCountry']));
@@ -60,7 +71,7 @@ class _FormLangageState extends State<FormLangage> {
       return Container(
         padding: EdgeInsets.only(top: 50),
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CustomLoading.progressiveDots(white, 50),
         ),
       );
     }
@@ -96,7 +107,9 @@ class _FormLangageState extends State<FormLangage> {
                     onChanged: (Locale? newValue) {
                       setState(() {
                         _selectedLocale = newValue!;
+
                         changeLangAfterSelected(context, newValue);
+
                         widget.onLocaleChange(_selectedLocale);
                       });
                     },
@@ -107,7 +120,7 @@ class _FormLangageState extends State<FormLangage> {
               ),
             )),
         const SizedBox(
-          height: 20,
+          height: 30,
         ),
         Container(
           width: 300,

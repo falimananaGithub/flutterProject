@@ -1,7 +1,7 @@
-import 'package:app/src/components/common/transition_page.dart';
+import 'package:app/src/screens/screen_home.dart';
+import 'package:app/src/screens/screen_login.dart';
 import 'package:flutter/material.dart';
-//import '../../screens/home_screen.dart';
-import 'package:app/src/screens/screen_pre_loading.dart';
+
 import 'package:app/src/screens/screen_register.dart';
 
 class AppRoutes {
@@ -11,14 +11,15 @@ class AppRoutes {
   AppRoutes({required this.isLangDisponible, required this.onLocaleChange});
   late final Function(Locale) onLocaleChange;
   final bool isLangDisponible;
-  final String preloading = '/preloading';
+  final String login = '/login';
   final String register = '/register';
+  final String home = '/home';
 
   // Map des routes pour faciliter la navigation
   Map<String, WidgetBuilder> getRoutes() {
     return {
       //home: (context) => HomeScreen(),
-      preloading: (context) => LoadingPage(
+      login: (context) => LoginScreen(
           onLocaleChange: onLocaleChange, isLangDisponible: isLangDisponible),
       register: (context) => const RegisterScreen(),
     };
@@ -26,10 +27,19 @@ class AppRoutes {
 
   Route<dynamic>? Function(RouteSettings settings) generateRoute() {
     return (RouteSettings settings) {
-      if (settings.name == '/register') {
-        return _createRoute(const RegisterScreen(), Direction.leftToRight);
+      switch (settings.name) {
+        case '/register':
+          return _createRoute(const RegisterScreen(), Direction.leftToRight);
+
+        case '/home':
+          return _createRoute(HomeScreen(), Direction.leftToRight);
+        default:
+          return _createRoute(
+              LoginScreen(
+                  onLocaleChange: onLocaleChange,
+                  isLangDisponible: isLangDisponible),
+              Direction.leftToRight);
       }
-      return null;
     };
   }
 }

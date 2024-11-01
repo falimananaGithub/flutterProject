@@ -29,7 +29,7 @@ class _FormRegisterState extends State<FormRegister> {
         email: mail.text,
         password: pass.text,
       );
-      Navigator.of(context).pushReplacementNamed('/preloading');
+      Navigator.of(context).pushReplacementNamed('/login');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

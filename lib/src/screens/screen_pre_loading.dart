@@ -1,4 +1,3 @@
-import 'package:app/src/components/common/loading/loading.dart';
 import 'package:app/src/core/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/screens/screen_login.dart';
@@ -16,17 +15,10 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
-    //create a pre-loading page
-    Future<void> _loadData() async {
-      await Future.delayed(Duration(seconds: 1));
-    }
-
     return Scaffold(
         backgroundColor: primaryFond,
-        body: Loading(
-            future: _loadData(),
-            widget: LoginScreen(
-                onLocaleChange: widget.onLocaleChange,
-                isLangDisponible: widget.isLangDisponible)));
+        body: LoginScreen(
+            onLocaleChange: widget.onLocaleChange,
+            isLangDisponible: widget.isLangDisponible));
   }
 }

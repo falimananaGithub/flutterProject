@@ -1,7 +1,6 @@
 import 'package:app/src/core/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/components/common/logo/logo_app.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:app/src/components/register/form_register.dart';
 import 'package:app/src/components/login/form_login.dart';
 
