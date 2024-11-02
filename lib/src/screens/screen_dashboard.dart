@@ -74,25 +74,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         const SizedBox(height: 10), // Space between input and posts
-        Container(
-          decoration: BoxDecoration(color: secondFond),
-          child: Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: posts.length,
-              itemBuilder: (context, index) {
-                final post = posts[index];
-                return PostWidget(
-                  profileImage: post['profileImage']!,
-                  username: post['username']!,
-                  timestamp: post['timestamp']!,
-                  content: post['content']!,
-                  postImage: post['postImage'],
-                );
-              },
-            ),
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return PostWidget(
+                profileImage: post['profileImage']!,
+                username: post['username']!,
+                timestamp: post['timestamp']!,
+                content: post['content']!,
+                postImage: post['postImage'],
+              );
+            },
           ),
-        )
+        ),
       ],
     );
   }

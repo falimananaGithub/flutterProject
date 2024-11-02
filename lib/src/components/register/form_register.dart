@@ -5,6 +5,7 @@ import 'package:app/src/components/register/Custom_field_pasword.dart';
 import 'package:app/src/components/register/Custom_field_email.dart';
 import 'package:app/src/components/register/Custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FormRegister extends StatefulWidget {
   final Function onSignInSelected;
@@ -38,6 +39,34 @@ class _FormRegisterState extends State<FormRegister> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  //sing up with crendentiel
+
+  Future<User?> signInWithGoogle() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) return null; // User cancelled the sign-in
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      // Once signed in, return the UserCredential
+      return userCredential.user;
+    } catch (e) {
+      print('Google Sign-In Error: $e');
+      return null;
     }
   }
 
@@ -158,17 +187,25 @@ class _FormRegisterState extends State<FormRegister> {
                       spacing: 5,
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              final user = await signInWithGoogle();
+                              if (user != null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text("Sign-Up successful!")),
+                                );
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text("Sign-up failled")),
+                                );
+                              }
+                            },
                             icon: Icon(
                               Icons.facebook,
                               color: Colors.blue,
                             )),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.email,
-                              color: white,
-                            ))
                       ],
                     ),
                   ),

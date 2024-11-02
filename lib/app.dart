@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         home: Loading(
             widget: Navigator(
-                initialRoute: FirebaseAuth.instance.currentUser != null
+                initialRoute: FirebaseAuth.instance.currentUser == null
                     ? routes.login
                     : routes.home,
                 onGenerateRoute: routes.generateRoute()),
