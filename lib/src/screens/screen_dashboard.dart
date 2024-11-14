@@ -3,7 +3,8 @@ import 'package:app/src/features/dashboard/post_widget.dart';
 import 'package:flutter/material.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  final ScrollController scrollController;
+  const DashboardScreen({super.key, required this.scrollController});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -11,54 +12,73 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   TextEditingController searchController = TextEditingController();
-  final List<Map<String, String>> posts = [
+
+  final List<Map<String, dynamic>> posts = [
     {
       'profileImage': 'assets/images/image.png',
       'username': 'User One',
       'timestamp': '2 hours ago',
       'content': 'This is a sample post content.',
-      'postImage': 'assets/images/image.png'
+      'postImages': [
+        'assets/images/image.png',
+        'assets/images/family1.jpeg',
+        'assets/images/family2.jpeg'
+      ]
     },
     {
       'profileImage': 'assets/images/image.png',
       'username': 'User Two',
       'timestamp': '3 hours ago',
       'content': 'Another sample post without an image.',
-    },
-
-    {
-      'profileImage': 'assets/images/image.png',
-      'username': 'User Two',
-      'timestamp': '3 hours ago',
-      'content': 'Another sample post without an image.',
+      'postImages': [
+        'assets/images/image.png',
+      ]
     },
     {
       'profileImage': 'assets/images/image.png',
       'username': 'User Two',
       'timestamp': '3 hours ago',
       'content': 'Another sample post without an image.',
+      'postImages': [
+        'assets/images/image.png',
+        'assets/images/image.png',
+        'assets/images/image.png'
+      ]
     },
-    // Add more posts as needed
+    {
+      'profileImage': 'assets/images/image.png',
+      'username': 'User Two',
+      'timestamp': '3 hours ago',
+      'content': 'Another sample post without an image.',
+      'postImages': [
+        'assets/images/image.png',
+        'assets/images/image.png',
+        'assets/images/image.png'
+      ]
+    },
   ];
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      controller: widget.scrollController,
+      padding: const EdgeInsets.all(10),
       children: [
         Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
             color: secondFond,
             borderRadius: const BorderRadius.all(Radius.circular(15)),
           ),
-          width: double.infinity,
-          height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 10),
+          height: 60,
           child: Row(
             children: [
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.person, color: Colors.white),
-              ),
+                  onPressed: () {},
+                  icon: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/family1.jpeg'),
+                  )),
               const SizedBox(width: 10),
               Expanded(
                 child: TextFormField(
@@ -73,22 +93,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 10), // Space between input and posts
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: posts.length,
-            itemBuilder: (context, index) {
-              final post = posts[index];
-              return PostWidget(
-                profileImage: post['profileImage']!,
-                username: post['username']!,
-                timestamp: post['timestamp']!,
-                content: post['content']!,
-                postImage: post['postImage'],
-              );
-            },
-          ),
+        // post list view
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(0),
+          itemCount: posts.length,
+          itemBuilder: (context, index) {
+            final post = posts[index];
+            return PostWidget(
+              profileImage: post['profileImage']!,
+              username: post['username']!,
+              timestamp: post['timestamp']!,
+              content: post['content']!,
+              postImages: post['postImages']!,
+            );
+          },
         ),
       ],
     );

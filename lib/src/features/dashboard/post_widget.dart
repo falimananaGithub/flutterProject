@@ -1,3 +1,4 @@
+import 'package:app/src/core/constants/constant.dart';
 import 'package:flutter/material.dart';
 
 class PostWidget extends StatelessWidget {
@@ -5,7 +6,7 @@ class PostWidget extends StatelessWidget {
   final String username;
   final String timestamp;
   final String content;
-  final String? postImage;
+  final List<String> postImages;
 
   const PostWidget({
     Key? key,
@@ -13,13 +14,14 @@ class PostWidget extends StatelessWidget {
     required this.username,
     required this.timestamp,
     required this.content,
-    this.postImage,
+    required this.postImages,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 2),
+      color: secondFond,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -38,7 +40,8 @@ class PostWidget extends StatelessWidget {
                   children: [
                     Text(
                       username,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: white),
                     ),
                     Text(
                       timestamp,
@@ -46,15 +49,44 @@ class PostWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+                const Spacer(),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.more_horiz,
+                      color: white,
+                    ))
               ],
             ),
             const SizedBox(height: 10),
             // Post content
-            Text(content),
+            Text(
+              content,
+              style: TextStyle(color: white),
+            ),
             const SizedBox(height: 10),
             // Post image (optional)
-            if (postImage != null)
-              Image.asset(postImage!) /*Image.network(postImage!)*/,
+
+            if (postImages.length == 1) Image.asset(postImages[0]),
+
+            if (postImages.isNotEmpty && postImages.length > 1)
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Adjust for the number of images per row
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 4,
+                ),
+                itemCount: postImages.length,
+                itemBuilder: (context, index) {
+                  return Image.asset(
+                    postImages[index],
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
+
             const SizedBox(height: 10),
             // Like and Comment buttons
             Row(
@@ -62,18 +94,36 @@ class PostWidget extends StatelessWidget {
               children: [
                 TextButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.thumb_up_alt_outlined),
-                  label: const Text('Like'),
+                  icon: const Icon(
+                    Icons.thumb_up_alt_outlined,
+                    color: white,
+                  ),
+                  label: const Text(
+                    '3,6k',
+                    style: TextStyle(color: white),
+                  ),
                 ),
                 TextButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.comment_outlined),
-                  label: const Text('Comment'),
+                  icon: const Icon(
+                    Icons.comment_outlined,
+                    color: white,
+                  ),
+                  label: const Text(
+                    '45',
+                    style: TextStyle(color: white),
+                  ),
                 ),
                 TextButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.share_outlined),
-                  label: const Text('Share'),
+                  icon: const Icon(
+                    Icons.share_outlined,
+                    color: white,
+                  ),
+                  label: const Text(
+                    '20',
+                    style: TextStyle(color: white),
+                  ),
                 ),
               ],
             ),

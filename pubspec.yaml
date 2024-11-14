@@ -68,7 +68,10 @@ flutter:
   generate: true
   assets:
     - assets/images/image.png
-
+    - assets/images/family1.jpeg
+    - assets/images/family2.jpeg
+    - assets/images/family3.jpeg
+    - assets/images/pdp.jpeg
   fonts:
     - family: TimesNewRoman  # Corrige l'espace ici
       fonts:
